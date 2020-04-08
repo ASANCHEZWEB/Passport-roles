@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const notificationSchema = new Schema(
   {
     tittle: String,
-    description: String
+    description: String,
+    idCreator: Schema.Types.ObjectId
   },
   {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },

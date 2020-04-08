@@ -26,6 +26,7 @@ router.post("/notifications", ensureLogin.ensureLoggedIn(), (req, res) => {
   const newNotification = new Notification({
     tittle: tittle,
     description: description,
+    idCreator: req.user._id
   });
 
   newNotification.save((err) => {
@@ -41,4 +42,12 @@ router.post("/notifications", ensureLogin.ensureLoggedIn(), (req, res) => {
   });
 });
 
+router.get("/my-notifications", ensureLogin.ensureLoggedIn(), (req, res) => {
+   
+    Notification.find({ idCreator: req.user._id })
+    .then(notiArray=> res.render("private-views/myNotifications.hbs", {notiArray: notiArray,}))
+    .catch(errorCallback=> console.log(errorCallback));
+  
+  });
+  
 module.exports = router;

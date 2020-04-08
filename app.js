@@ -103,4 +103,6 @@ const login = require("./routes/auth-routes/login");
 app.use("/", login);
 const private = require("./routes/private-routes/userInfo");
 app.use("/", private);
+const notifications = require("./routes/private-routes/addNotifications");
+app.use("/", notifications);
 module.exports = app;

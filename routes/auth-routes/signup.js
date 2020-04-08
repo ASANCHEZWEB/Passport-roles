@@ -19,10 +19,12 @@ router.get("/signup", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-
+  let role = "cliente";
   //Compruebo si se ha rellenado vacio
   if (username === "" || password === "") {
-    res.render("auth-views/signup", { message: "Indicate username and password" });
+    res.render("auth-views/signup", {
+      message: "Indicate username and password",
+    });
     return;
   }
   //Compruebo si el username a registrar ya está registrado
@@ -38,10 +40,13 @@ router.post("/signup", (req, res, next) => {
 
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
-
+      if (username === "Admin") {
+        role = "Admin";
+      }
       const newUser = new User({
         username,
         password: hashPass,
+        role: role,
       });
       //En el caso de que no exista , creo un nuevo usuario con usando la instancia newUser.
       newUser.save((err) => {

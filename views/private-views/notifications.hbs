@@ -1,0 +1,22 @@
+{{#if user}}
+<form action="/notifications" method="POST">
+    <div>
+        <label for="tittle">Titulo:</label>
+        <input type="text" name="tittle">
+    </div>
+    <div>
+        <label for="description">Descripción:</label>
+        <input type="text" name="description">
+    </div>
+    <div>
+        <input type="submit" value="Añadir notificación">
+    </div>
+</form>
+{{/if}}
+
+<ul>
+    {{#each nose}}
+    <li> tittle :{{this.tittle}} description: {{this.description}}</li>
+
+    {{/each}}
+</ul>
